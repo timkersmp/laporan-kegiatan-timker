@@ -1,17 +1,48 @@
 @extends('layouts.app')
 @section('title', 'Ubah Data Laporan')
 @section('content')
-<div class="page-heading"><div><p class="eyebrow">ARSIP LAPORAN</p><h1>Ubah Data Laporan</h1><p>Perbarui data laporan yang sudah diterima.</p></div><a class="button quiet" href="{{ route('reports.archive') }}">Kembali ke Data Laporan</a></div>
-<section class="panel report-form-panel"><form class="form-grid" method="post" action="{{ route('reports.update', $laporan) }}" enctype="multipart/form-data">@csrf @method('patch')
-    <label>Nama Kegiatan<input name="nama_kegiatan" value="{{ old('nama_kegiatan', $laporan->kegiatan?->nama_kegiatan) }}" required maxlength="255"></label>
-    <label>Tanggal Kegiatan<input type="date" name="tanggal_kegiatan" value="{{ old('tanggal_kegiatan', $laporan->kegiatan?->tanggal_kegiatan?->format('Y-m-d')) }}" required></label>
-    <label>Lokasi Kegiatan<input name="lokasi_kegiatan" value="{{ old('lokasi_kegiatan', $laporan->kegiatan?->lokasi_kegiatan) }}" required maxlength="255"></label>
-    <label>Karyawan<select name="petugas_id" required>@foreach($karyawan as $person)<option value="{{ $person->id }}" @selected(old('petugas_id', $laporan->petugas_id) == $person->id)>{{ $person->nama }}{{ $person->nip ? ' — '.$person->nip : '' }}</option>@endforeach</select></label>
-    <label>Status<select name="status" required>@foreach(['Menunggu Verifikasi' => 'Menunggu Verifikasi', 'Lengkap' => 'Lengkap', 'Perlu Diperbaiki' => 'Perlu Diperbaiki', 'Ditolak' => 'Ditolak', 'disetujui' => 'Disetujui', 'perlu_diperbaiki' => 'Perlu Diperbaiki'] as $value => $label)<option value="{{ $value }}" @selected(old('status', $laporan->status) === $value)>{{ $label }}</option>@endforeach</select></label>
-    <label class="span-two">Isi Laporan<textarea name="isi_laporan" rows="7" required minlength="10">{{ old('isi_laporan', $laporan->isi_laporan) }}</textarea></label>
-    <label class="span-two">Catatan Admin <small>Wajib jika status Perlu Diperbaiki atau Ditolak</small><textarea name="catatan_admin" rows="3">{{ old('catatan_admin', $laporan->catatan_admin) }}</textarea></label>
-    <div class="span-two attachment-editor"><strong>Lampiran</strong>@if($laporan->lampiran)<p><a href="{{ route('reports.attachment', $laporan) }}" target="_blank" rel="noopener">Lihat lampiran saat ini</a></p><label class="check-card"><input type="checkbox" name="hapus_lampiran" value="1"><span>Hapus lampiran saat ini</span></label>@else<p class="muted">Belum ada lampiran.</p>@endif<label class="file-caption" for="edit-report-attachment">Ganti / tambah lampiran <small>Opsional · PDF, gambar, atau dokumen (maks. 10 MB)</small></label><div class="file-picker"><input class="file-input" id="edit-report-attachment" type="file" name="lampiran_file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"><label class="button quiet" for="edit-report-attachment">Masukan laporan</label><span class="file-name" id="edit-report-attachment-name">Belum ada berkas dipilih</span></div></div>
-    <div class="form-action span-two"><button class="button primary">Simpan Perubahan</button> <a class="button quiet" href="{{ route('reports.archive') }}">Batal</a></div>
-</form></section>
+<div class="page-heading">
+    <div>
+        <span class="eyebrow">Arsip Laporan</span>
+        <h1>Ubah Data Laporan</h1>
+        <p>Perbarui data laporan yang sudah diterima.</p>
+    </div>
+    <div class="page-actions"><a class="button quiet" href="{{ route('reports.archive') }}"><i class="bx bx-arrow-back"></i> Kembali ke Data Laporan</a></div>
+</div>
+
+<section class="card panel report-form-panel">
+    <div class="card-header"><h2>Informasi laporan</h2><i class="bx bx-edit" style="color:var(--primary);font-size:20px"></i></div>
+    <div class="card-body">
+        <form class="form-grid" method="post" action="{{ route('reports.update', $laporan) }}" enctype="multipart/form-data">
+            @csrf @method('patch')
+            <label>Nama Kegiatan<input name="nama_kegiatan" value="{{ old('nama_kegiatan', $laporan->kegiatan?->nama_kegiatan) }}" required maxlength="255"></label>
+            <label>Tanggal Kegiatan<input type="date" name="tanggal_kegiatan" value="{{ old('tanggal_kegiatan', $laporan->kegiatan?->tanggal_kegiatan?->format('Y-m-d')) }}" required></label>
+            <label>Lokasi Kegiatan<input name="lokasi_kegiatan" value="{{ old('lokasi_kegiatan', $laporan->kegiatan?->lokasi_kegiatan) }}" required maxlength="255"></label>
+            <label>Karyawan<select name="petugas_id" required>@foreach($karyawan as $person)<option value="{{ $person->id }}" @selected(old('petugas_id', $laporan->petugas_id) == $person->id)>{{ $person->nama }}{{ $person->nip ? ' — '.$person->nip : '' }}</option>@endforeach</select></label>
+            <label>Status<select name="status" required>@foreach(['Menunggu Verifikasi' => 'Menunggu Verifikasi', 'Lengkap' => 'Lengkap', 'Perlu Diperbaiki' => 'Perlu Diperbaiki', 'Ditolak' => 'Ditolak', 'disetujui' => 'Disetujui', 'perlu_diperbaiki' => 'Perlu Diperbaiki'] as $value => $label)<option value="{{ $value }}" @selected(old('status', $laporan->status) === $value)>{{ $label }}</option>@endforeach</select></label>
+            <label class="span-two">Isi Laporan<textarea name="isi_laporan" rows="7" required minlength="10">{{ old('isi_laporan', $laporan->isi_laporan) }}</textarea></label>
+            <label class="span-two">Catatan Admin <small>Wajib jika status Perlu Diperbaiki atau Ditolak</small><textarea name="catatan_admin" rows="3">{{ old('catatan_admin', $laporan->catatan_admin) }}</textarea></label>
+            <div class="span-two attachment-editor">
+                <strong>Lampiran</strong>
+                @if($laporan->lampiran)
+                    <p><a href="{{ route('reports.attachment', $laporan) }}" target="_blank" rel="noopener"><i class="bx bx-paperclip"></i> Lihat lampiran saat ini</a></p>
+                    <label class="check-card"><input type="checkbox" name="hapus_lampiran" value="1"><span>Hapus lampiran saat ini</span></label>
+                @else
+                    <p class="muted">Belum ada lampiran.</p>
+                @endif
+                <label class="file-caption" for="edit-report-attachment">Ganti / tambah lampiran <small>Opsional · PDF, gambar, atau dokumen (maks. 10 MB)</small></label>
+                <div class="file-picker">
+                    <input class="file-input" id="edit-report-attachment" type="file" name="lampiran_file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                    <label class="button quiet" for="edit-report-attachment"><i class="bx bx-upload"></i> Masukan laporan</label>
+                    <span class="file-name" id="edit-report-attachment-name">Belum ada berkas dipilih</span>
+                </div>
+            </div>
+            <div class="form-action span-two">
+                <button class="button primary"><i class="bx bx-save"></i> Simpan Perubahan</button>
+                <a class="button quiet" href="{{ route('reports.archive') }}">Batal</a>
+            </div>
+        </form>
+    </div>
+</section>
 <script>document.getElementById('edit-report-attachment')?.addEventListener('change', function () { document.getElementById('edit-report-attachment-name').textContent = this.files[0]?.name || 'Belum ada berkas dipilih'; });</script>
 @endsection

@@ -13,7 +13,7 @@
 <section class="card panel">
     <div class="card-header"><h2>Riwayat laporan</h2><span class="badge-info badge">{{ $laporan->count() }} laporan</span></div>
     <div class="table-toolbar">
-        <div class="table-search"><i class="bx bx-search"></i><input type="search" data-table-target="#completedTable" placeholder="Cari kegiatan atau status..."></div>
+        <div class="table-search"><i class="bx bx-search"></i><input type="search" data-table-target="#completedTable" value="{{ request('q') }}" placeholder="Cari kegiatan atau status..."></div>
     </div>
     <div class="table-wrap">
         <table id="completedTable">

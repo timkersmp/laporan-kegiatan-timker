@@ -10,22 +10,51 @@
     <div class="page-actions"><a class="button primary" href="{{ route('reports.index') }}"><i class="bx bx-inbox"></i> Periksa Laporan</a></div>
 </div>
 
+<section class="card panel welcome-card">
+    <div class="card-body">
+        <h2>Selamat datang, {{ session('name') }}! 🎉</h2>
+        <p>Pantau ringkasan kegiatan dan laporan masuk, lalu kelola proses verifikasi dari satu ruang kerja.</p>
+        <a class="button button-sm" href="{{ route('reports.index') }}"><i class="bx bx-show"></i> Lihat laporan masuk</a>
+        <i class="bx bx-trophy welcome-art" aria-hidden="true"></i>
+    </div>
+</section>
+
 <section class="stats-grid">
     <article class="stat">
-        <span class="stat-icon"><i class="bx bx-group"></i></span>
-        <div><span class="stat-label">Total Karyawan</span><strong class="stat-value">{{ $totalPetugas }}</strong><span class="stat-hint">Data karyawan terdaftar</span></div>
+        <div class="stat-top">
+            <span class="stat-icon"><i class="bx bx-group"></i></span>
+            <a class="stat-more" href="{{ route('staff.index') }}" aria-label="Lihat data karyawan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Total Karyawan</span>
+        <strong class="stat-value">{{ $totalPetugas }}</strong>
+        <span class="stat-hint trend-up"><i class="bx bx-up-arrow-alt"></i> Data karyawan terdaftar</span>
     </article>
     <article class="stat">
-        <span class="stat-icon info"><i class="bx bx-calendar-event"></i></span>
-        <div><span class="stat-label">Total Kegiatan</span><strong class="stat-value">{{ $totalKegiatan }}</strong><span class="stat-hint">Kegiatan tercatat</span></div>
+        <div class="stat-top">
+            <span class="stat-icon info"><i class="bx bx-calendar-event"></i></span>
+            <a class="stat-more" href="{{ route('reports.archive') }}" aria-label="Lihat data laporan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Total Kegiatan</span>
+        <strong class="stat-value">{{ $totalKegiatan }}</strong>
+        <span class="stat-hint"><i class="bx bx-bar-chart-alt-2"></i> Kegiatan tercatat</span>
     </article>
     <article class="stat">
-        <span class="stat-icon success"><i class="bx bx-file-blank"></i></span>
-        <div><span class="stat-label">Total Laporan</span><strong class="stat-value">{{ $totalLaporan }}</strong><span class="stat-hint">Seluruh laporan masuk</span></div>
+        <div class="stat-top">
+            <span class="stat-icon success"><i class="bx bx-file-blank"></i></span>
+            <a class="stat-more" href="{{ route('reports.archive') }}" aria-label="Lihat arsip laporan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Total Laporan</span>
+        <strong class="stat-value">{{ $totalLaporan }}</strong>
+        <span class="stat-hint trend-up"><i class="bx bx-up-arrow-alt"></i> Seluruh laporan masuk</span>
     </article>
     <article class="stat">
-        <span class="stat-icon warning"><i class="bx bx-time-five"></i></span>
-        <div><span class="stat-label">Menunggu Verifikasi</span><strong class="stat-value">{{ $totalMenunggu }}</strong><span class="stat-hint">Perlu ditindaklanjuti</span></div>
+        <div class="stat-top">
+            <span class="stat-icon warning"><i class="bx bx-time-five"></i></span>
+            <a class="stat-more" href="{{ route('reports.index') }}" aria-label="Periksa laporan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Menunggu Verifikasi</span>
+        <strong class="stat-value">{{ $totalMenunggu }}</strong>
+        <span class="stat-hint trend-wait"><i class="bx bx-time"></i> Perlu ditindaklanjuti</span>
     </article>
 </section>
 

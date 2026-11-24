@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=2">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=3">
 </head>
 <body>
 @php
@@ -43,6 +43,7 @@
                 ]],
             ]);
     $homeRoute = $role === 'petugas' ? 'employee.dashboard' : ($role === 'verifikator' ? 'reports.index' : 'dashboard');
+    $searchRoute = $role === 'petugas' ? 'employee.completed' : 'reports.archive';
     $roleLabel = match ($role) { 'petugas' => 'Karyawan', 'verifikator' => 'Verifikator', default => 'Administrator' };
     $initial = strtoupper(substr(session('name', '?'), 0, 1));
 @endphp
@@ -90,11 +91,29 @@
                 <span>{{ View::yieldContent('title', 'Dashboard') }}</span>
             </nav>
             <div class="navbar-spacer"></div>
-            <div class="user-menu">
-                <span class="avatar">{{ $initial }}</span>
-                <span class="user-meta"><strong>{{ session('name') }}</strong><small>{{ $roleLabel }}</small></span>
-                <i class="bx bx-chevron-down" style="color:var(--muted)"></i>
-            </div>
+            <form class="nav-search" method="get" action="{{ route($searchRoute) }}" role="search">
+                <i class="bx bx-search" aria-hidden="true"></i>
+                <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari laporan..." aria-label="Cari laporan">
+            </form>
+            <details class="user-dropdown" id="userDropdown">
+                <summary class="user-menu">
+                    <span class="avatar">{{ $initial }}</span>
+                    <span class="user-meta"><strong>{{ session('name') }}</strong><small>{{ $roleLabel }}</small></span>
+                    <i class="bx bx-chevron-down" style="color:var(--muted)"></i>
+                </summary>
+                <div class="dropdown-menu">
+                    <div class="dropdown-profile">
+                        <strong>{{ session('name') }}</strong>
+                        <small>{{ $roleLabel }}</small>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route($homeRoute) }}"><i class="bx bx-home-alt-2"></i> Ruang kerja</a>
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="dropdown-item danger-text" type="submit"><i class="bx bx-log-out"></i> Keluar</button>
+                    </form>
+                </div>
+            </details>
         </header>
 
         <main class="container">
@@ -132,8 +151,16 @@
     overlay?.addEventListener('click', closeMenu);
     document.querySelectorAll('#layoutMenu .menu-link').forEach((link) => link.addEventListener('click', closeMenu));
 
+    const userDropdown = document.getElementById('userDropdown');
+    document.addEventListener('click', (event) => {
+        if (userDropdown?.open && !userDropdown.contains(event.target)) userDropdown.open = false;
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && userDropdown) userDropdown.open = false;
+    });
+
     document.querySelectorAll('.table-search input[data-table-target]').forEach((input) => {
-        input.addEventListener('input', () => {
+        const applyFilter = () => {
             const table = document.querySelector(input.dataset.tableTarget);
             if (!table) return;
             const query = input.value.trim().toLowerCase();
@@ -141,7 +168,9 @@
                 if (row.querySelector('td.empty')) return;
                 row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
             });
-        });
+        };
+        input.addEventListener('input', applyFilter);
+        applyFilter();
     });
 })();
 </script>

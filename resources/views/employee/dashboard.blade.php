@@ -10,18 +10,42 @@
     <div class="page-actions"><a class="button primary" href="{{ route('employee.report') }}"><i class="bx bx-plus"></i> Kirim Laporan</a></div>
 </div>
 
-<section class="stats-grid">
+<section class="card panel welcome-card">
+    <div class="card-body">
+        <h2>Selamat datang, {{ $petugas->nama }}! 🎉</h2>
+        <p>Kirim laporan kegiatan Anda dan pantau status verifikasinya. Semua riwayat tersimpan rapi di ruang kerja ini.</p>
+        <a class="button button-sm" href="{{ route('employee.report') }}"><i class="bx bx-send"></i> Buat laporan baru</a>
+        <i class="bx bx-bar-chart-alt-2 welcome-art" aria-hidden="true"></i>
+    </div>
+</section>
+
+<section class="stats-grid employee-cards">
     <article class="stat">
-        <span class="stat-icon info"><i class="bx bx-calendar-check"></i></span>
-        <div><span class="stat-label">Kegiatan Dilaporkan</span><strong class="stat-value">{{ $totalKegiatan }}</strong><span class="stat-hint">Kegiatan yang Anda laporkan</span></div>
+        <div class="stat-top">
+            <span class="stat-icon info"><i class="bx bx-calendar-check"></i></span>
+            <a class="stat-more" href="{{ route('employee.completed') }}" aria-label="Lihat kegiatan selesai"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Kegiatan Dilaporkan</span>
+        <strong class="stat-value">{{ $totalKegiatan }}</strong>
+        <span class="stat-hint"><i class="bx bx-calendar"></i> Kegiatan yang Anda laporkan</span>
     </article>
     <article class="stat">
-        <span class="stat-icon success"><i class="bx bx-file-blank"></i></span>
-        <div><span class="stat-label">Laporan Terkirim</span><strong class="stat-value">{{ $totalLaporan }}</strong><span class="stat-hint">Total laporan Anda</span></div>
+        <div class="stat-top">
+            <span class="stat-icon success"><i class="bx bx-file-blank"></i></span>
+            <a class="stat-more" href="{{ route('employee.completed') }}" aria-label="Lihat riwayat laporan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Laporan Terkirim</span>
+        <strong class="stat-value">{{ $totalLaporan }}</strong>
+        <span class="stat-hint trend-up"><i class="bx bx-up-arrow-alt"></i> Total laporan Anda</span>
     </article>
     <article class="stat">
-        <span class="stat-icon warning"><i class="bx bx-time-five"></i></span>
-        <div><span class="stat-label">Menunggu Verifikasi</span><strong class="stat-value">{{ $menungguVerifikasi }}</strong><span class="stat-hint">Sedang diperiksa admin</span></div>
+        <div class="stat-top">
+            <span class="stat-icon warning"><i class="bx bx-time-five"></i></span>
+            <a class="stat-more" href="{{ route('employee.completed') }}" aria-label="Lihat status laporan"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
+        <span class="stat-label">Menunggu Verifikasi</span>
+        <strong class="stat-value">{{ $menungguVerifikasi }}</strong>
+        <span class="stat-hint trend-wait"><i class="bx bx-time"></i> Sedang diperiksa admin</span>
     </article>
 </section>
 

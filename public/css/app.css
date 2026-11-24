@@ -755,6 +755,128 @@ thead th {
   background: linear-gradient(90deg, #fafaff, #f6f7ff);
 }
 
+/* ============================================================
+   Abstract texture on light surfaces
+   ============================================================ */
+
+body {
+  background-color: #f5f5f9;
+  background-image:
+    radial-gradient(circle at 6% 4%, rgba(105, 108, 255, .16) 0, transparent 28%),
+    radial-gradient(circle at 92% 10%, rgba(3, 195, 236, .12) 0, transparent 26%),
+    radial-gradient(circle at 78% 92%, rgba(255, 159, 67, .10) 0, transparent 30%),
+    repeating-linear-gradient(135deg, rgba(105, 108, 255, .022) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg, #f8f8fc, #f3f4fa);
+}
+
+.layout-menu {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(105, 108, 255, .18) 0, transparent 38%),
+    radial-gradient(circle at 100% 100%, rgba(3, 195, 236, .12) 0, transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(247, 248, 255, .96));
+}
+
+.layout-menu::before,
+.layout-menu::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.layout-menu::before {
+  width: 190px;
+  height: 190px;
+  right: -105px;
+  top: 130px;
+  border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
+  background: linear-gradient(135deg, rgba(105, 108, 255, .13), rgba(3, 195, 236, .05));
+}
+
+.layout-menu::after {
+  width: 150px;
+  height: 150px;
+  left: -85px;
+  bottom: 90px;
+  border-radius: 58% 42% 35% 65% / 40% 55% 45% 60%;
+  background: linear-gradient(135deg, rgba(255, 159, 67, .10), rgba(105, 108, 255, .05));
+}
+
+.layout-navbar {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(circle at 82% -80%, rgba(105, 108, 255, .16), transparent 60%),
+    linear-gradient(180deg, #ffffff, #fbfbff);
+}
+
+.layout-navbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, #696cff, #03c3ec 55%, transparent);
+  opacity: .35;
+}
+
+.card:not(.welcome-card), .panel:not(.welcome-card) {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(105, 108, 255, .07), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgba(3, 195, 236, .06), transparent 40%),
+    repeating-linear-gradient(135deg, rgba(105, 108, 255, .018) 0 1px, transparent 1px 13px);
+}
+
+.card-header, .panel-header {
+  background-image: linear-gradient(180deg, rgba(252, 252, 255, .92), rgba(255, 255, 255, .92));
+}
+
+thead th {
+  background-image: linear-gradient(90deg, rgba(245, 245, 255, .95), rgba(251, 251, 255, .95));
+}
+
+tbody tr:nth-child(even) {
+  background-image: linear-gradient(90deg, rgba(252, 252, 255, .85), rgba(255, 255, 255, .85));
+}
+tbody tr:hover {
+  background-image: linear-gradient(90deg, #f6f6ff, #fbfbff);
+}
+
+.welcome-card {
+  background-color: #696cff;
+  background-image:
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, .20), transparent 34%),
+    radial-gradient(circle at 16% 120%, rgba(3, 195, 236, .35), transparent 42%),
+    linear-gradient(118deg, #7578ff, #696cff 55%, #5457e8);
+}
+
+.login-page {
+  background-color: #f6f6fd;
+  background-image:
+    radial-gradient(circle at 10% 12%, rgba(105, 108, 255, .18), transparent 32%),
+    radial-gradient(circle at 90% 88%, rgba(3, 195, 236, .14), transparent 32%),
+    repeating-linear-gradient(135deg, rgba(105, 108, 255, .025) 0 1px, transparent 1px 16px),
+    linear-gradient(135deg, #f5f5fd, #fdfdff);
+}
+
+.login-intro {
+  background-image:
+    radial-gradient(circle at 85% 12%, rgba(255, 255, 255, .18), transparent 32%),
+    radial-gradient(circle at 10% 90%, rgba(3, 195, 236, .30), transparent 38%),
+    linear-gradient(145deg, #7e81ff 0%, #696cff 48%, #5457e8 100%);
+}
+
+.login-intro::before {
+  border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, .03));
+}
+.login-intro::after {
+  border-radius: 58% 42% 35% 65% / 40% 55% 45% 60%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .02));
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1200px) {

@@ -643,6 +643,118 @@ td form { margin: 0; }
 
 .menu-overlay { display: none; position: fixed; inset: 0; z-index: 25; background: rgba(47,51,73,.4); }
 
+/* ============================================================
+   Gradient accents
+   ============================================================ */
+
+body {
+  background:
+    radial-gradient(circle at 8% 0%, #eeeeff 0, transparent 30%),
+    linear-gradient(180deg, #f8f8fc 0%, #f3f4fa 100%);
+}
+
+.layout-menu {
+  background: linear-gradient(180deg, #ffffff 0%, #fafaff 52%, #f2f3ff 100%);
+}
+
+.app-brand img {
+  background: linear-gradient(135deg, #efefff, #dfe5ff);
+}
+
+.app-brand strong {
+  background: linear-gradient(90deg, #696cff, #03c3ec);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.menu-link.active {
+  background: linear-gradient(90deg, #696cff, #8588ff);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(105, 108, 255, .25);
+}
+.menu-link.active:hover { color: #fff; }
+.menu-link.active i { color: #fff; }
+
+.layout-navbar {
+  background: linear-gradient(180deg, #ffffff, #fbfbff);
+}
+
+.nav-search {
+  background: linear-gradient(135deg, #f5f5fd, #edf3ff);
+}
+
+.avatar {
+  background: linear-gradient(135deg, #8f91ff, #696cff);
+  color: #fff;
+}
+
+.card:not(.welcome-card), .panel:not(.welcome-card) {
+  background: linear-gradient(160deg, #ffffff 0%, #fbfbff 100%);
+}
+
+.card-header, .panel-header {
+  background: linear-gradient(180deg, #fcfcff, #ffffff);
+}
+
+thead th {
+  background: linear-gradient(90deg, #f5f5ff, #fbfbff);
+}
+
+.stat {
+  background: linear-gradient(155deg, #ffffff 0%, #fafaff 100%);
+}
+
+.stat-icon { background: linear-gradient(135deg, #8f91ff, #696cff); color: #fff; }
+.stat-icon.success { background: linear-gradient(135deg, #62d6a3, #2fbf71); color: #fff; }
+.stat-icon.warning { background: linear-gradient(135deg, #ffc36e, #ff9f43); color: #fff; }
+.stat-icon.info { background: linear-gradient(135deg, #63d9f4, #03c3ec); color: #fff; }
+.stat-icon.danger { background: linear-gradient(135deg, #ff9195, #f2555a); color: #fff; }
+
+.primary, .btn-primary {
+  background: linear-gradient(135deg, #7578ff, #696cff);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(105, 108, 255, .25);
+}
+.primary:hover, .btn-primary:hover {
+  background: linear-gradient(135deg, #696cff, #5e61e8);
+  color: #fff;
+}
+
+.quiet, .btn-secondary {
+  background: linear-gradient(135deg, #f6f6fd, #edeeff);
+  color: #5d6178;
+}
+
+.danger, .btn-danger { background: linear-gradient(135deg, #ffe7e9, #ffdfe1); }
+.warning, .btn-warning { background: linear-gradient(135deg, #fff3e2, #ffe9cc); }
+
+.badge { background: linear-gradient(135deg, #efefff, #e3e7ff); }
+.badge-success, .status-active, .status-approved { background: linear-gradient(135deg, #e8f8ef, #d3f2e1); }
+.badge-warning, .status-review, .status-inactive { background: linear-gradient(135deg, #fff4e6, #ffe9cc); }
+.badge-danger, .status-rejected { background: linear-gradient(135deg, #ffedee, #ffdfe1); }
+.badge-info { background: linear-gradient(135deg, #e3f8fd, #d3f0fa); }
+
+.menu-links a:hover {
+  border-color: #8f91ff;
+  box-shadow: 0 8px 20px rgba(105, 108, 255, .16);
+}
+
+.login-layout {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #696cff, #03c3ec) border-box;
+}
+
+.login-intro {
+  background: linear-gradient(145deg, #7e81ff 0%, #696cff 48%, #5457e8 100%);
+}
+
+.app-footer {
+  background: linear-gradient(90deg, #fafaff, #f6f7ff);
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1200px) {

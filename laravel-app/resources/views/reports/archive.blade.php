@@ -1,0 +1,8 @@
+@extends('layouts.app')
+@section('title', 'Data Laporan')
+@section('content')
+<div class="page-heading"><div><p class="eyebrow">ARSIP</p><h1>Data Laporan</h1><p>Daftar seluruh laporan yang telah diterima sistem.</p></div><a class="button primary" href="{{ route('reports.index') }}">Penerimaan Laporan</a></div>
+<section class="panel"><div class="table-wrap"><table><thead><tr><th>No</th><th>Nama Kegiatan</th><th>Tanggal Kegiatan</th><th>Karyawan</th><th>NIP</th><th>Tanggal Dikirim</th><th>Status</th><th>Lampiran</th><th>Aksi</th></tr></thead><tbody>
+@forelse($laporan as $item)<tr><td>{{ $loop->iteration }}</td><td>{{ $item->kegiatan?->nama_kegiatan ?: 'Kegiatan dihapus' }}</td><td>{{ $item->kegiatan?->tanggal_kegiatan?->format('d M Y') ?: '—' }}</td><td>{{ $item->petugas?->nama ?: 'Karyawan dihapus' }}</td><td>{{ $item->petugas?->nip ?: '—' }}</td><td>{{ $item->dibuat_pada?->format('d M Y H:i') ?: '—' }}</td><td><span class="badge">{{ $item->status }}</span>@if($item->catatan_admin)<small class="table-note">{{ $item->catatan_admin }}</small>@endif</td><td>@if($item->lampiran)<a href="{{ route('reports.attachment', $item) }}" target="_blank" rel="noopener">Lihat</a>@else—@endif</td><td><div class="account-actions"><a class="button quiet" href="{{ route('reports.edit', $item) }}">Ubah</a><form method="post" action="{{ route('reports.destroy', $item) }}" onsubmit="return confirm('Hapus laporan ini secara permanen?')">@csrf @method('delete')<button class="button danger">Hapus</button></form></div></td></tr>@empty<tr><td colspan="9" class="empty">Belum ada laporan yang disetujui.</td></tr>@endforelse
+</tbody></table></div></section>
+@endsection
